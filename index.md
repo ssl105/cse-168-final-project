@@ -25,5 +25,6 @@ $$\xi_{1}\in[0,1]$$
  - [SIGGRAPH 04: Graphics gems revisited](https://dl.acm.org/doi/10.1145/1015706.1015708)
  - [Photon Mapping](https://graphics.stanford.edu/courses/cs348b-00/course8.pdf)
  - [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader)
+ - [median of medians algorithm](https://www.youtube.com/watch?v=RItfXpx3SD4)
 
 {% include lib/mathjax.html %}
