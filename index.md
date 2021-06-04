@@ -1,37 +1,38 @@
-## Welcome to GitHub Pages
+# Rendering Gems by Scott Lee
+![gems](images/gems.jpeg)
 
-You can use the [editor on GitHub](https://github.com/ssl105/cse-168-final-project/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Project Proposal
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I was first interested in implementing the interaction between gems and aurora borealis, but after doing some preliminary research it would have been too much to handle alone given the timespan. So, I decided to simply focus on rendering gems and implementing the research from this [paper](https://dl.acm.org/doi/10.1145/1015706.1015708). 
 
-### Markdown
+## What I've Implemented So Far
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+I was able to find a free diamond model on [cgtrader](https://www.cgtrader.com/free-3d-models/scripts-plugins/modelling/low-poly-diamond-6899deeb-29ce-4d74-aa69-cc5d6418a390). From there I incorporated [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader) into my code to work together with the parser used in previous assignments. I added a new command for the test scenes: 
 
-```markdown
-Syntax highlighted code block
+`obj pathToObjFile`
 
-# Header 1
-## Header 2
-### Header 3
+This allows me to utilize previous scenes and reuse transformation and material command formats. This also makes it easier to add multiple obj files to one scene. The images below are of the diamond model referenced earlier using different transformations inside the cornell box defined in previous assignments.
 
-- Bulleted
-- List
+### Images
+The images below use 128 samples per pixel and multiple important sampling. 
 
-1. Numbered
-2. List
+![cornell1](images/cornellRR.png)
 
-**Bold** and _Italic_ and `Code` text
+![cornell2](images/cornellRR2.png)
 
-[Link](url) and ![Image](src)
-```
+## Next Steps
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+- Implement refraction using [photon mapping](https://graphics.stanford.edu/courses/cs348b-00/course8.pdf) to allow for next event estimation.
+- Implement physically accurate absorption.
+- Implement extraordinary rays for anisotropic gems such as sapphire. Anisotropic gems split refracted rays into two separate rays as shown in the image below:
 
-### Jekyll Themes
+![extraordinary](images/extraordinary.png)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ssl105/cse-168-final-project/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Image from [SIGGRAPH 04: Graphics gems revisited](https://dl.acm.org/doi/10.1145/1015706.1015708).
 
-### Support or Contact
+My hope is to at least implement photon mapping and absorption mentioned above. Trying to implement extraordinarys may be challenging since the number of rays will increase exponentially. Furthermore I expect to incorporate more models in the scenes to test different intereactions with refractions. 
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Resources
+ - [SIGGRAPH 04: Graphics gems revisited](https://dl.acm.org/doi/10.1145/1015706.1015708)
+ - [Photon Mapping](https://graphics.stanford.edu/courses/cs348b-00/course8.pdf)
+ - [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader)
