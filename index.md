@@ -26,5 +26,6 @@ $$\xi_{1}\in[0,1]$$
  - [Photon Mapping](https://graphics.stanford.edu/courses/cs348b-00/course8.pdf)
  - [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader)
  - [median of medians algorithm](https://www.youtube.com/watch?v=RItfXpx3SD4)
+ - [heap implementation](https://algorithmtutor.com/Data-Structures/Tree/Binary-Heaps/)
 
 {% include lib/mathjax.html %}
