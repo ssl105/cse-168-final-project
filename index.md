@@ -22,10 +22,13 @@ $$\xi_{1}\in[0,1]$$
 
 
 # Resources
- - [SIGGRAPH 04: Graphics gems revisited](https://dl.acm.org/doi/10.1145/1015706.1015708)
  - [Photon Mapping](https://graphics.stanford.edu/courses/cs348b-00/course8.pdf)
+ - [Reflection and Refraction](https://graphics.stanford.edu/courses/cs148-10-summer/docs/2006--degreve--reflection_refraction.pdf)
  - [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader)
  - [median of medians algorithm](https://www.youtube.com/watch?v=RItfXpx3SD4)
  - [heap implementation](https://algorithmtutor.com/Data-Structures/Tree/Binary-Heaps/)
+ - [Slides found online for KNN algorithms](https://www.colorado.edu/amath/sites/default/files/attached-files/k-d_trees_and_knn_searches.pdf)
+ - [Video on KD Trees](https://www.youtube.com/watch?v=Glp7THUpGow&ab_channel=StableSort)
+ - [SIGGRAPH 04: Graphics gems revisited](https://dl.acm.org/doi/10.1145/1015706.1015708)
 
 {% include lib/mathjax.html %}
