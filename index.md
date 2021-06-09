@@ -16,8 +16,10 @@ This allows me to utilize previous scenes and reuse transformation and material 
 
 ### Photon mapping
 
+#### Ray Generation
 I started the process by creating a new ray generation program and closest hit integrator on optix. Some pseudocode was given for ray generation in the photon mapping paper. I used stratified sampling to evenly sample the origin for each photon ray on a quadlight. I also used cosine sampling for the direction of the photon since they are more likely to travel in aligment with the normal of the light.
 
+#### Photon Tracing
 For the integrator, I followed the russian roullete method outlined in the paper. Given $$K_{d}$$ for diffuse and $$K_{s}$$ for specular, the probability of reflection is calculated as such: 
 
 $$P_{r} = max(K_{d}.x + K_{s}.x, K_{d}.y + K_{s}.y, K_{d}.z + K_{s}.z)$$
@@ -31,23 +33,33 @@ Probability of specular reflection:
 
 $$P_{s} = \frac{K_{s}.x + K_{s}.y + K_{s}.z}{K_{d}.x + K_{d}.y + K_{d}.z + K_{s}.x + K_{s}.y + K_{s}.z}P_{r}$$
 
-$$\xi\in[0, P_{d}] \rightarrow$$ diffuse reflection
+To determine whether a photon is reflected or absorbed, we can use the probability model below, for a random variable $$\xi$$.
 
-$$\xi\in[P_{d}, P_{r}] \rightarrow$$ specular reflection
+->$$\xi\in[0, P_{d}] \rightarrow$$ diffuse reflection<-
 
-$$\xi\in[P_{r}, 1] \rightarrow$$ absorbance
+->$$\xi\in[P_{d}, P_{r}] \rightarrow$$ specular reflection<-
+
+->$$\xi\in[P_{r}, 1] \rightarrow$$ absorbance<-
 
 Given the power of an incoming photon $$P_{inc}$$, the power of the specular reflected photon is calculated as such:
 
-$$P_{refl}.x = P_{inc}.x K_{s}.x / P_{s}$$
+->$$P_{refl}.x = P_{inc}.x K_{s}.x / P_{s}$$<-
 
-$$P_{refl}.y = P_{inc}.x K_{s}.y / P_{s}$$
+->$$P_{refl}.y = P_{inc}.x K_{s}.y / P_{s}$$<-
 
-$$P_{refl}.z = P_{inc}.x K_{s}.z / P_{s}$$
+->$$P_{refl}.z = P_{inc}.x K_{s}.z / P_{s}$$<-
 
 The diffuse reflect power can be calculated in the same ways as above. 
 
-To determine whether a ray is transmitted or reflected I use Sh
+To determine whether a ray is transmitted or reflected I use Schlick's approximation outline in this [paper](https://graphics.stanford.edu/courses/cs148-10-summer/docs/2006--degreve--reflection_refraction.pdf). We adapt the formula to russian roullette given the reflectance $$R_{schlick}$$.
+
+->$$\xi\in[0, R_{schlick}] \rightarrow$$ reflection<-
+
+->$$\xi\in[R_{schlick}, 1] \rightarrow$$ refraction<-
+
+Then we divide the power of the reflected photon with the reflectance $$R_{schlick}$$. For a refracted photon we divide by the transmittance calculated as $$1 - R_{schlick}$$.
+
+
 ven absorbance coefficient $$K_{a}$$, which is an rgb value, the color that is transmitted with each photon would be calculated by subtracting the coefficient by 1: $1 -K_{a}$$
 
 ### Images
