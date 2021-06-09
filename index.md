@@ -31,9 +31,24 @@ Probability of specular reflection:
 
 $$P_{s} = \frac{K_{s}.x + K_{s}.y + K_{s}.z}{K_{d}.x + K_{d}.y + K_{d}.z + K_{s}.x + K_{s}.y + K_{s}.z}P_{r}$$
 
-$$\xi\in[0, P_{d}] \rightarrow diffuse reflection$$
-$$\xi\in[P_{d}, P_{r}] \rightarrow specular reflection$$
-$$\xi\in[P_{r}, 1] \rightarrow absorbance$$
+$$\xi\in[0, P_{d}] \rightarrow$$ diffuse reflection
+
+$$\xi\in[P_{d}, P_{r}] \rightarrow$$ specular reflection
+
+$$\xi\in[P_{r}, 1] \rightarrow$$ absorbance
+
+Given the power of an incoming photon $$P_{inc}$$, the power of the specular reflected photon is calculated as such:
+
+$$P_{refl}.x = P_{inc}.x K_{s}.x / P_{s}$$
+
+$$P_{refl}.y = P_{inc}.x K_{s}.y / P_{s}$$
+
+$$P_{refl}.z = P_{inc}.x K_{s}.z / P_{s}$$
+
+The diffuse reflect power can be calculated in the same ways as above. 
+
+To determine whether a ray is transmitted or reflected I use Sh
+ven absorbance coefficient $$K_{a}$$, which is an rgb value, the color that is transmitted with each photon would be calculated by subtracting the coefficient by 1: $1 -K_{a}$$
 
 ### Images
 
