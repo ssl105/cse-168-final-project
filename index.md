@@ -85,9 +85,12 @@ Unfortunately I was unable to succesfully render images using the photon map. Th
 
 The images below show Schlick's approximation using BRDF importance sampling with around 500 spp. 
 Index of refraction of the sphere in the first image is 1 and 2.42 in the second. 
+![cornellR1](images/cornellRefraction1.png)
+
+![cornellR2.42](images/cornellRefraction2.42.png)
 
 The image below is a failed rendering of the photon map using 200,000 photons and 1 radiance sample.
-
+![cornellR2](images/cornellRefraction2.png)
 
 # Resources
  - [Photon Mapping](https://graphics.stanford.edu/courses/cs348b-00/course8.pdf)
