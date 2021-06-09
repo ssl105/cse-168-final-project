@@ -69,6 +69,11 @@ Then we divide the power of the reflected photon with the reflectance $$R_{schli
 
 A recursive algorithm to balance a set of photons is given in the photon mapping paper. It requires a median finding algorithm. I use the [median of medians algorithm](https://www.youtube.com/watch?v=RItfXpx3SD4) that has O(n) runtime. I had trouble with the balancing method for large sets of photons causing stack overflows due to deep recursion. This was caused by the median finding algorithm also being recursive, so the issue was fixed by implementing it iteratively. When loading the KD tree to the GPU, the tree can be formatted as an array using indices to determine parent child relationships. Given index p, the left and right child in array would be 2p + 1 and 2p + 2. The parent of p would be (p - 1) / 2.
 
+Traversing the tree is another challenge to implementing a KD tree through CUDA since recursion is not allowed. I attempted to implement it iteratively using outlines from these [slides](https://www.colorado.edu/amath/sites/default/files/attached-files/k-d_trees_and_knn_searches.pdf). It follows the same structure as the recursive algorithm and uses indices to traverse down parent and child relationships. To determine whether both child's of a node have been visited, I added a boolean indicator. The variable is turned to true whenever we traverse down the second child, so that when we traverse back up it will indicate that the search for that node is complete. The variable is also set to false whenever we traverse up which resets the variable for future traversals. 
+
+#### Radiance Calculation
+
+
 ### Images
 
 
