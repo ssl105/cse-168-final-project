@@ -14,6 +14,12 @@ I was able to find a free diamond model on [cgtrader](https://www.cgtrader.com/f
 
 This allows me to utilize previous scenes and reuse transformation and material command formats. This also makes it easier to add multiple obj files to one scene.
 
+The images below use 128 samples per pixel and multiple important sampling. 
+
+![cornell1](images/cornellRR.png)
+
+![cornell2](images/cornellRR2.png)
+
 ### Photon mapping
 
 #### Ray Generation
@@ -35,29 +41,33 @@ $$P_{s} = \frac{K_{s}.x + K_{s}.y + K_{s}.z}{K_{d}.x + K_{d}.y + K_{d}.z + K_{s}
 
 To determine whether a photon is reflected or absorbed, we can use the probability model below, for a random variable $$\xi$$.
 
-->$$\xi\in[0, P_{d}] \rightarrow$$ diffuse reflection<-
+$$\xi\in[0, P_{d}] \rightarrow \text{diffuse reflection}$$
 
-->$$\xi\in[P_{d}, P_{r}] \rightarrow$$ specular reflection<-
+$$\xi\in[P_{d}, P_{r}] \rightarrow \text{specular reflection}$$
 
-->$$\xi\in[P_{r}, 1] \rightarrow$$ absorbance<-
+$$\xi\in[P_{r}, 1] \rightarrow \text{absorbance}$$
 
 Given the power of an incoming photon $$P_{inc}$$, the power of the specular reflected photon is calculated as such:
 
-->$$P_{refl}.x = P_{inc}.x K_{s}.x / P_{s}$$<-
+$$P_{refl}.x = P_{inc}.x K_{s}.x / P_{s}$$
 
-->$$P_{refl}.y = P_{inc}.x K_{s}.y / P_{s}$$<-
+$$P_{refl}.y = P_{inc}.x K_{s}.y / P_{s}$$
 
-->$$P_{refl}.z = P_{inc}.x K_{s}.z / P_{s}$$<-
+$$P_{refl}.z = P_{inc}.x K_{s}.z / P_{s}$$
 
 The diffuse reflect power can be calculated in the same ways as above. 
 
 To determine whether a ray is transmitted or reflected I use Schlick's approximation outline in this [paper](https://graphics.stanford.edu/courses/cs148-10-summer/docs/2006--degreve--reflection_refraction.pdf). We adapt the formula to russian roullette given the reflectance $$R_{schlick}$$.
 
-->$$\xi\in[0, R_{schlick}] \rightarrow$$ reflection<-
+$$\xi\in[0, R_{schlick}] \rightarrow \text{reflection}$$
 
-->$$\xi\in[R_{schlick}, 1] \rightarrow$$ refraction<-
+$$\xi\in[R_{schlick}, 1] \rightarrow \text{refraction}$$
 
 Then we divide the power of the reflected photon with the reflectance $$R_{schlick}$$. For a refracted photon we divide by the transmittance calculated as $$1 - R_{schlick}$$. Using the absorbance coefficient $$K_{a}$$, which is an rgb value, the color that is transmitted with each photon would be calculated by subtracting the coefficient by 1: $$1 -K_{a}$$
+
+#### KD tree
+
+A recursive algorithm to balance a set of photons is given in the photon mapping paper. It requires a median finding algorithm. I use the [median of medians algorithm](https://www.youtube.com/watch?v=RItfXpx3SD4) that has O(n) runtime. I had trouble with the balancing method for large sets of photons causing stack overflows due to deep recursion. This was caused by the median finding algorithm also being recursive, so the issue was fixed by implementing it iteratively. When loading the KD tree to the GPU, the tree can be formatted as an array using indices to determine parent child relationships. Given index p, the left and right child in array would be 2p + 1 and 2p + 2. The parent of p would be (p - 1) / 2.
 
 ### Images
 
