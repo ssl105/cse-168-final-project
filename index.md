@@ -81,7 +81,7 @@ Since the photon map only stores photons in diffuse surfaces, the radiance for s
 
 ### Results & Images
 
-Unfortunately I was unable to succesfully render images using the photon map. There may be issues with the map construction, but construction is relatively quick. However, tree traversal for radiance samples past 10 took to long for quick renders, so there may be issues with my formulas there. Another issue may be with the radiance calcuation as I am not completely confident with how I approached the calculation. 
+Unfortunately I was unable to succesfully render images using the photon map. There may be issues with the map construction, but construction is relatively quick. However, tree traversal for radiance samples past 10 took to long for quick renders, so there may be issues with my formulas there, but it is also possible to be just a system issue. Another issue may be with the radiance calcuation as I am not completely confident with how I approached the calculation. 
 
 The images below show Schlick's approximation using BRDF importance sampling with around 500 spp. 
 Index of refraction of the sphere in the first image is 1 and 2.42 in the second. 
