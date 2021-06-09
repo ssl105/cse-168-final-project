@@ -22,8 +22,18 @@ For the integrator, I followed the russian roullete method outlined in the paper
 
 $$P_{r} = max(K_{d}.x + K_{s}.x, K_{d}.y + K_{s}.y, K_{d}.z + K_{s}.z)$$
 
+The probability of absorbtion would be $$P_{a} = 1 - P_{r}$$. 
+Furthermore the probability of diffuse reflection:
 
-$$\xi_{1}\in[0,1]$$
+$$P_{d} = \frac{K_{d}.x + K_{d}.y + K_{d}.z}{K_{d}.x + K_{d}.y + K_{d}.z + K_{s}.x + K_{s}.y + K_{s}.z}P_{r}$$
+
+Probability of specular reflection:
+
+$$P_{s} = \frac{K_{s}.x + K_{s}.y + K_{s}.z}{K_{d}.x + K_{d}.y + K_{d}.z + K_{s}.x + K_{s}.y + K_{s}.z}P_{r}$$
+
+$$\xi\in[0, P_{d}] \rightarrow diffuse reflection$$
+$$\xi\in[P_{d}, P_{r}] \rightarrow specular reflection$$
+$$\xi\in[P_{r}, 1] \rightarrow absorbance$$
 
 ### Images
 
