@@ -3,21 +3,31 @@
 
 # Project Overview
 
-I was first interested in implementing the interaction between gems and aurora borealis, but after doing some preliminary research it would have been too much to handle alone given the timespan. So, I decided to simply focus on rendering gems and implementing the research from this [paper](https://dl.acm.org/doi/10.1145/1015706.1015708). 
+I was first interested in implementing the interaction between gems and aurora borealis, but after doing some preliminary research it would have been too much to handle alone given the timespan. I tried to  focus on rendering gems and implementing the research from this [paper](https://dl.acm.org/doi/10.1145/1015706.1015708), but ultimately thought that implementing [photon mapping](https://graphics.stanford.edu/courses/cs348b-00/course8.pdf) would be more interesting.
 
 ## Implementation
 
+### objloader
 I was able to find a free diamond model on [cgtrader](https://www.cgtrader.com/free-3d-models/scripts-plugins/modelling/low-poly-diamond-6899deeb-29ce-4d74-aa69-cc5d6418a390). From there I incorporated [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader) into my code to work together with the parser used in previous assignments. I added a new command for the test scenes: 
 
 `obj pathToObjFile`
 
 This allows me to utilize previous scenes and reuse transformation and material command formats. This also makes it easier to add multiple obj files to one scene.
 
+### Photon mapping
+
+I started the process by creating a new ray generation program and closest hit integrator on optix. Some pseudocode was given for ray generation in the photon mapping paper. I used stratified sampling to evenly sample the origin for each photon ray on a quadlight. I also used cosine sampling for the direction of the photon since they are more likely to travel in aligment with the normal of the light.
+
+For the integrator, I followed the russian roullete method outlined in the paper. Given $$K_{d}$$ for diffuse and $$K_{s}$$ for specular, the probability of reflection is calculated as such: 
+
+$$P_{r} = max(K_{d}.x + K_{s}.x, K_{d}.y + K_{s}.y, K_{d}.z + K_{s}.z)$$
+
+
 $$\xi_{1}\in[0,1]$$
 
 ### Images
 
-## Next Steps
+
 
 
 
