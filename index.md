@@ -57,10 +57,7 @@ To determine whether a ray is transmitted or reflected I use Schlick's approxima
 
 ->$$\xi\in[R_{schlick}, 1] \rightarrow$$ refraction<-
 
-Then we divide the power of the reflected photon with the reflectance $$R_{schlick}$$. For a refracted photon we divide by the transmittance calculated as $$1 - R_{schlick}$$.
-
-
-ven absorbance coefficient $$K_{a}$$, which is an rgb value, the color that is transmitted with each photon would be calculated by subtracting the coefficient by 1: $1 -K_{a}$$
+Then we divide the power of the reflected photon with the reflectance $$R_{schlick}$$. For a refracted photon we divide by the transmittance calculated as $$1 - R_{schlick}$$. Using the absorbance coefficient $$K_{a}$$, which is an rgb value, the color that is transmitted with each photon would be calculated by subtracting the coefficient by 1: $$1 -K_{a}$$
 
 ### Images
 
